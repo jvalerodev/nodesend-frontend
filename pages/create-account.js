@@ -5,10 +5,11 @@ import Layout from '../components/Layout';
 import ErrorForm from '../components/ErrorForm';
 import Alert from '../components/Alert';
 import useAuth from '../hooks/useAuth';
+import Loading from '../components/Loading';
 
 const CreateAccount = () => {
   // Acceder al state
-  const { isAuthenticated, signUp, message } = useAuth();
+  const { isAuthenticated, signUp, message, loading } = useAuth();
   const router = useRouter();
 
   if (isAuthenticated && typeof window !== 'undefined') {
@@ -45,6 +46,8 @@ const CreateAccount = () => {
 
   return (
     <Layout>
+      {loading && <Loading loading={loading} />}
+      
       <div className="md:w-4/5 xl:w-3/5 mx-auto">
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-12">Create Account</h2>
 

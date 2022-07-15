@@ -1,3 +1,4 @@
+export const LOADING = 'LOADING';
 export const SUCCESSFUL_SIGN_UP = 'SUCCESSFUL_SIGN_UP';
 export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN';

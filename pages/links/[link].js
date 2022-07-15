@@ -6,11 +6,22 @@ import Alert from '../../components/Alert';
 
 export const getServerSideProps = async ({ params }) => {
   const { link } = params;
-  const res = await axiosClient(`/api/links/${link}`);
+  let resp;
+
+  try {
+    resp = await axiosClient(`/api/links/${link}`);
+  } catch (error) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      }
+    };
+  }
 
   return {
     props: {
-      link: res.data
+      link: resp.data
     }
   };
 };
@@ -78,7 +89,7 @@ const Link = ({ link }) => {
         <>
           <h1 className="text-4xl text-center text-gray-700 font-bold">Download your file:</h1>
           <div className="flex items-center justify-center mt-10">
-            <a href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/files/${link.file}`} className="bg-red-500 hover:bg-red-600 py-3 px-10 rounded text-white font-bold uppercase">Here</a>
+            <a href={`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/files/${link.file}`} className="bg-red-500 hover:bg-red-600 py-3 px-10 rounded text-white font-bold uppercase">Here</a>
           </div>
         </>
       )}

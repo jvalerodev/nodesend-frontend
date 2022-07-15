@@ -1,8 +1,9 @@
 import { useReducer } from 'react';
+import { useRouter } from 'next/router';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import axiosClient from '../../config/axios';
-import { SUCCESSFUL_SIGN_UP, SIGN_UP_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT, HIDE_ALERT } from '../../types';
+import { LOADING, SUCCESSFUL_SIGN_UP, SIGN_UP_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT, HIDE_ALERT } from '../../types';
 
 // Usuario autenticado en base al JWT
 const getUser = async token => {
@@ -12,10 +13,10 @@ const getUser = async token => {
   let user = null;
 
   try {
-    const res = await axiosClient('/api/auth');
+    const res = await axiosClient(`/api/auth`);
     user = res.data.user;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.msg);
   }
 
   return user;
@@ -26,14 +27,21 @@ const AuthProvider = ({ children, user }) => {
   const initialState = {
     isAuthenticated: user ? true : false,
     user: user,
-    message: null
+    message: null,
+    loading: false
   };
+
+  const router = useRouter();
 
   // Reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Registrar nuevo usuario
   const signUp = async data => {
+    dispatch({
+      type: LOADING
+    });
+    
     let success = false;
 
     try {
@@ -60,6 +68,10 @@ const AuthProvider = ({ children, user }) => {
 
   // Iniciar sesion
   const logIn = async data => {
+    dispatch({
+      type: LOADING
+    });
+    
     try {
       const res = await axiosClient.post('/api/auth/login', data, {
         withCredentials: true,
@@ -93,6 +105,8 @@ const AuthProvider = ({ children, user }) => {
       dispatch({
         type: SIGN_OUT
       });
+      
+      router.reload();
     } catch (error) {
       console.log(error);
     }
@@ -104,6 +118,7 @@ const AuthProvider = ({ children, user }) => {
         isAuthenticated: state.isAuthenticated,
         user: state.user,
         message: state.message,
+        loading: state.loading,
         signUp,
         logIn,
         logOut

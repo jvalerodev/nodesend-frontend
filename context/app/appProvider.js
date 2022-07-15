@@ -36,12 +36,11 @@ const AppProvider = ({ children, token }) => {
       type: UPLOAD_FILE
     });
 
-    console.log(token);
-
     if (token) axiosClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
     try {
-      const res = await axiosClient.post('/api/files', file);
+      const res = await axiosClient.post('/api/files/upload', file);
+
       dispatch({
         type: SUCCESSFUL_FILE_UPLOAD,
         payload: { filename: res.data.file, originalName: filename }
@@ -67,7 +66,8 @@ const AppProvider = ({ children, token }) => {
     if (token) axiosClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
     try {
-      const res = await axiosClient.post('/api/links', data);
+      const res = await axiosClient.post('/api/links/create', data);
+      
       dispatch({
         type: LINK_CREATED_SUCCESSFULLY,
         payload: res.data.msg

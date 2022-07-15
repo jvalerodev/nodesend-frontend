@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Layout from '../components/Layout';
 import ErrorForm from '../components/ErrorForm';
 import Alert from '../components/Alert';
 import useAuth from '../hooks/useAuth';
+import Loading from '../components/Loading';
 
 const Login = () => {
-  const { logIn, message, isAuthenticated } = useAuth();
+  const { logIn, message, isAuthenticated, loading } = useAuth();
 
   if (isAuthenticated && typeof window !== 'undefined') {
     location.href = '/';
@@ -26,13 +26,15 @@ const Login = () => {
       password: Yup.string()
         .required('Password is required.')
     }),
-    onSubmit: values => {
-      logIn(values);
+    onSubmit: async values => {
+      await logIn(values);
     }
   });
 
   return (
     <Layout>
+      {loading && <Loading loading={loading} />}
+
       <div className="md:w-4/5 xl:w-3/5 mx-auto">
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-12">Log in</h2>
 
