@@ -1,8 +1,8 @@
 import { useReducer } from 'react';
-import AppContext from './appContext';
-import appReducer from './appReducer';
-import axiosClient from '../../config/axios';
-import { UPLOAD_FILE, SUCCESSFUL_FILE_UPLOAD, FAILED_FILE_UPLOAD, LINK_CREATED_SUCCESSFULLY, ERROR_CREATING_LINK, ADD_DOWNLOADS, ADD_PASSWORD, CLEAN_STATE, SHOW_ALERT, HIDE_ALERT } from '../../types';
+import AppContext from '@/context/app/appContext';
+import appReducer from '@/context/app/appReducer';
+import axiosClient from '@/config/axios';
+import { UPLOAD_FILE, SUCCESSFUL_FILE_UPLOAD, FAILED_FILE_UPLOAD, LINK_CREATED_SUCCESSFULLY, ERROR_CREATING_LINK, ADD_DOWNLOADS, ADD_PASSWORD, CLEAN_STATE, SHOW_ALERT, HIDE_ALERT } from '@/types/index';
 
 const AppProvider = ({ children, token }) => {
   const initialState = {
@@ -39,7 +39,7 @@ const AppProvider = ({ children, token }) => {
     if (token) axiosClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
     try {
-      const res = await axiosClient.post('/api/files/upload', file);
+      const res = await axiosClient.post('/api/files/', file);
 
       dispatch({
         type: SUCCESSFUL_FILE_UPLOAD,
@@ -66,7 +66,7 @@ const AppProvider = ({ children, token }) => {
     if (token) axiosClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
     try {
-      const res = await axiosClient.post('/api/links/create', data);
+      const res = await axiosClient.post('/api/links', data);
       
       dispatch({
         type: LINK_CREATED_SUCCESSFULLY,

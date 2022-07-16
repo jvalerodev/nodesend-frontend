@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Layout from '../components/Layout';
-import ErrorForm from '../components/ErrorForm';
-import Alert from '../components/Alert';
-import useAuth from '../hooks/useAuth';
-import Loading from '../components/Loading';
+import Layout from '@/components/Layout';
+import ErrorForm from '@/components/ErrorForm';
+import Alert from '@/components/Alert';
+import Loading from '@/components/Loading';
+import useAuth from '@/hooks/useAuth';
 
 const Login = () => {
   const { logIn, message, isAuthenticated, loading } = useAuth();

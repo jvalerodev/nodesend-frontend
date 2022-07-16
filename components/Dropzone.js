@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import useAuth from '../hooks/useAuth';
-import useApp from '../hooks/useApp';
-import Form from './Form';
+import useAuth from '@/hooks/useAuth';
+import useApp from '@/hooks/useApp';
+import Form from '@/components/Form';
 
 const Dropzone = () => {
   const { isAuthenticated } = useAuth();

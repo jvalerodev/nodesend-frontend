@@ -1,7 +1,7 @@
 import App from 'next/app';
 import '../styles/globals.css';
-import AuthProvider, { getUser } from '../context/auth/authProvider';
-import AppProvider from '../context/app/appProvider';
+import AuthProvider, { getUser } from '@/context/auth/authProvider';
+import AppProvider from '@/context/app/appProvider';
 
 const MyApp = ({ Component, pageProps, user, token }) => {
   return (

@@ -1,5 +1,5 @@
-import useAuth from '../hooks/useAuth';
-import useApp from '../hooks/useApp';
+import useAuth from '@/hooks/useAuth';
+import useApp from '@/hooks/useApp';
 
 const Alert = () => {
   const { message } = useAuth();

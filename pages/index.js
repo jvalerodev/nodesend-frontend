@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import Layout from '../components/Layout';
-import Dropzone from '../components/Dropzone';
-import useAuth from '../hooks/useAuth';
-import useApp from '../hooks/useApp';
-import Alert from '../components/Alert';
+import Layout from '@/components/Layout';
+import Dropzone from '@/components/Dropzone';
+import Alert from '@/components/Alert';
+import useAuth from '@/hooks/useAuth';
+import useApp from '@/hooks/useApp';
 
 const Home = () => {
   const { isAuthenticated } = useAuth();

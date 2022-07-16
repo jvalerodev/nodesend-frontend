@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useAuth from '../hooks/useAuth';
-import useApp from '../hooks/useApp';
+import useAuth from '@/hooks/useAuth';
+import useApp from '@/hooks/useApp';
 
 const Header = () => {
   const { user, logOut } = useAuth();

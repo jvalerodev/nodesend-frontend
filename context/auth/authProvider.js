@@ -1,9 +1,10 @@
 import { useReducer } from 'react';
 import { useRouter } from 'next/router';
-import AuthContext from './authContext';
-import authReducer from './authReducer';
-import axiosClient from '../../config/axios';
-import { LOADING, SUCCESSFUL_SIGN_UP, SIGN_UP_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT, HIDE_ALERT } from '../../types';
+import axios from 'axios';
+import AuthContext from '@/context/auth/authContext';
+import authReducer from '@/context/auth/authReducer';
+import axiosClient from '@/config/axios';
+import { LOADING, SUCCESSFUL_SIGN_UP, SIGN_UP_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT, HIDE_ALERT } from '@/types/index';
 
 // Usuario autenticado en base al JWT
 const getUser = async token => {
@@ -73,7 +74,7 @@ const AuthProvider = ({ children, user }) => {
     });
     
     try {
-      const res = await axiosClient.post('/api/auth/login', data, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/auth/login`, data, {
         withCredentials: true,
         credentials: 'include'
       });
@@ -98,7 +99,7 @@ const AuthProvider = ({ children, user }) => {
   // Cerrar sesion
   const logOut = async () => {
     try {
-      const res = await axiosClient.post('/api/auth/logout', {}, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/auth/logout`, {}, {
         withCredentials: true,
         credentials: 'include'
       });

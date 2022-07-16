@@ -1,9 +1,9 @@
 import cookie from 'cookie';
-import connectDB from '../../../server/config/db';
-import User from '../../../server/models/User';
-import validate from '../../../server/middleware/validate';
-import loginSchema from '../../../server/validators/loginSchema';
-import generateJWT from '../../../server/helpers/generateJWT';
+import connectDB from '@/server/config/db';
+import User from '@/server/models/User';
+import validate from '@/server/middleware/validate';
+import loginSchema from '@/server/validators/loginSchema';
+import generateJWT from '@/server/helpers/generateJWT';
 
 connectDB();
 

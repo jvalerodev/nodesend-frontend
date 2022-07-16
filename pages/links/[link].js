@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Layout from '../../components/Layout';
-import axiosClient from '../../config/axios';
-import useApp from '../../hooks/useApp';
-import Alert from '../../components/Alert';
+import Layout from '@/components/Layout';
+import Alert from '@/components/Alert';
+import axiosClient from '@/config/axios';
+import useApp from '@/hooks/useApp';
 
 export const getServerSideProps = async ({ params }) => {
   const { link } = params;
@@ -89,7 +89,7 @@ const Link = ({ link }) => {
         <>
           <h1 className="text-4xl text-center text-gray-700 font-bold">Download your file:</h1>
           <div className="flex items-center justify-center mt-10">
-            <a href={`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/files/${link.file}`} className="bg-red-500 hover:bg-red-600 py-3 px-10 rounded text-white font-bold uppercase">Here</a>
+            <a href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/files/${link.file}`} className="bg-red-500 hover:bg-red-600 py-3 px-10 rounded text-white font-bold uppercase">Here</a>
           </div>
         </>
       )}

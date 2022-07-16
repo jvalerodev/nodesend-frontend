@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useApp from '../hooks/useApp';
+import useApp from '@/hooks/useApp';
 
 const Form = () => {
   const [protect, setProtect] = useState(false);
